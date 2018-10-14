@@ -1,16 +1,16 @@
-import cv2
 import tempfile
+from os.path import isfile, join
+from os import listdir
+import cv2
 import pytesseract
 from pdf2image import convert_from_path
-from os import listdir
-from os.path import isfile, join
 
-folder = 'samples/'
+FOLDER = 'samples/'
 
-onlyfiles = [f for f in listdir(folder) if isfile(join(folder, f))]
+ONLY_FILES = [f for f in listdir(FOLDER) if isfile(join(FOLDER, f))]
 
-for file in onlyfiles:
-    full_file = folder + file
+for current_file in ONLY_FILES:
+    full_file = FOLDER + current_file
     with tempfile.TemporaryDirectory() as path:
         images_from_path = convert_from_path(full_file, fmt='jpeg', output_folder=path)
         for image in images_from_path:
